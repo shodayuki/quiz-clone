@@ -33,11 +33,15 @@ class Quiz {
   static async fetchAndCreateQuizzes() {
     const quizDataList = await QuizFetcher.fetch();
 
-    return quizDataList.results.map(result => {
+    return Quiz.createQuizInstancesWithData(quizDataList.results);
+  }
+
+  static createQuizInstancesWithData(quizDataList) {
+    return quizDataList.map(quizData => {
       return {
-        question: he.decode(result.question),
-        correctAnswer: he.decode(result.correct_answer),
-        incorrectAnswers: result.incorrect_answers.map(str => he.decode(str))
+        question: he.decode(quizData.question),
+        correctAnswer: he.decode(quizData.correct_answer),
+        incorrectAnswers: quizData.incorrect_answers.map(str => he.decode(str))
       };
     })
     .map(quizData => {
