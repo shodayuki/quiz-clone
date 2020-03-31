@@ -42,7 +42,6 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
-    "babel-jest": "^25.2.4",
     "redux-mock-store": "^1.5.4"
   }
 }
