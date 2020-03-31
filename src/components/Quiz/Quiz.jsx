@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import QuizModel from '../../models/Quiz';
+import { connect } from 'react-redux';
 import Button from '../Button/Button';
+import { fetchQuizzes } from '../../actions/quizActionCreator';
 import './Quiz.css';
 
 class Quiz extends React.Component {
@@ -9,26 +10,21 @@ class Quiz extends React.Component {
     super(props);
 
     this.state = {
-      quizzes: [],
       currentIndex : 0,
       numberOfCorrects : 0
     };
   }
 
-  async componentDidMount() {
-    await this.restart();
+  componentDidMount() {
+    this.restart();
   }
 
-  async restart() {
+  restart() {
     this.setState({
-      quizzes: [],
       currentIndex : 0,
       numberOfCorrects : 0
     });
-
-    const quizzes = await QuizModel.fetchAndCreateQuizzes();
-
-    this.setState({ quizzes });
+    this.props.fetchQuizzes();
   }
 
   selectAnswer(quiz, answer) {
@@ -50,7 +46,8 @@ class Quiz extends React.Component {
   }
 
   render() {
-    const { quizzes, currentIndex } = this.state;
+    const { quizzes } = this.props.quizInfo;
+    const { currentIndex } = this.state;
 
     // 読み込み中
     if (quizzes.length === 0) {
@@ -80,7 +77,8 @@ class Quiz extends React.Component {
   }
 
   renderQuiz() {
-    const { currentIndex, quizzes } = this.state;
+    const { quizzes } = this.props.quizInfo;
+    const { currentIndex } = this.state;
 
     const quiz = quizzes[currentIndex];
     const answers = quiz.shuffleAnswers().map((answer, index) => {
@@ -106,7 +104,8 @@ class Quiz extends React.Component {
   }
 
   renderResult() {
-    const { quizzes, numberOfCorrects } = this.state;
+    const { quizzes } = this.props.quizInfo;
+    const { numberOfCorrects } = this.state;
 
     return (
       <div>
@@ -124,4 +123,17 @@ class Quiz extends React.Component {
   }
 }
 
-export default Quiz;
+const mapStateToProps = (state) => {
+  return {
+    quizInfo: state.quizInfo,
+  };
+};
+
+const mapDispatchToProps = {
+  fetchQuizzes
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Quiz);
