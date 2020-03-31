@@ -25,7 +25,7 @@ describe('Quizクラスのテスト', () => {
 
         expect( quiz._question ).toStrictEqual(quizData.question);
         expect( quiz._correctAnswer ).toStrictEqual(quizData.correctAnswer);
-        expect( quiz._incorrectAnswer ).toStrictEqual(quizData.incorrectAnswers);
+        expect( quiz._incorrectAnswers ).toStrictEqual(quizData.incorrectAnswers);
       });
     });
   });
@@ -53,7 +53,7 @@ describe('Quizクラスのテスト', () => {
   });
 
   describe('judgeCorrectAnswerメソッド', () => {
-    it('引数の値が正解ならtrue,不正解ならfalseが通る', () => {
+    it('引数の値が正解ならtrue, 不正解ならfalseが通る', () => {
       const quizData = createMockQuiz();
       const quiz = new Quiz(quizData);
 

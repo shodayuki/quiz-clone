@@ -18,7 +18,7 @@ describe('QuizFetcherのテスト', () => {
         expect(typeof quiz.question).toStrictEqual('string');
         expect(typeof quiz.correct_answer).toStrictEqual('string');
 
-        expect( Arary.isArray(quiz.incorrect_answers) ).toStrictEqual(true);
+        expect( Array.isArray(quiz.incorrect_answers) ).toStrictEqual(true);
         expect( quiz.incorrect_answers.length ).toStrictEqual(3);
         quiz.incorrect_answers.forEach(incorrectAnswer => {
           expect(typeof incorrectAnswer).toStrictEqual('string');
