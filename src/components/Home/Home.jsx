@@ -6,7 +6,7 @@ const Home = ({history}) => {
     <div>
       <h1>ホーム</h1>
       <Button
-          onClickHander={() => {
+          onClickHandler={() => {
           history.push('/quiz');
         }}
       >

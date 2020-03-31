@@ -4,7 +4,7 @@ import QuizFetcher from '../data_fetchers/QuizFetcher';
 
 class Quiz {
   constructor({question, correctAnswer, incorrectAnswers}){
-    console.log(question, correctAnswer, incorrectAnswers, '@@@');
+    console.log(question, correctAnswer, incorrectAnswers, '@@@@@@');
 
     this._question = question;
     this._correctAnswer = correctAnswer;
